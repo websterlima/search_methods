@@ -2,11 +2,12 @@ package metodos_busca;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BuscaLargura {
 
 	public static void buscar(Graph graph, String key) {
-		ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+		List<GraphNode> nodeList = new ArrayList<GraphNode>();
 		
 		nodeList.add(graph.getRootNode());
 		
@@ -18,8 +19,8 @@ public class BuscaLargura {
 				break;
 			}
 			
-			List<GraphNode> sons = node.getSons();
-			for (GraphNode graphNode : sons) {
+			Map<GraphNode, Integer> sons = node.getSons();
+			for (GraphNode graphNode : sons.keySet()) {
 				if (!graphNode.isVisited() && !nodeList.contains(graphNode))
 					nodeList.add(graphNode);
 			}

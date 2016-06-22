@@ -1,41 +1,49 @@
 package metodos_busca;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GraphNode {
 
 	private boolean visited;
 	private String name;
-	private List<GraphNode> sons;
+	private Map<GraphNode, Integer> sons;
+	private int accumulatedDistance;
 
 	public GraphNode(String name) {
 		this.visited = false;
 		this.name = name;
-		this.sons = new ArrayList<GraphNode>();
+		this.sons = new HashMap<GraphNode, Integer>();
+		this.accumulatedDistance = 0;
 	}
 
 	public void visit() {
 		visited = true;
 
-		System.out.println("Visit node " + name);
+		System.out.print(name + " > ");
 	}
 
 	public boolean isVisited() {
 		return visited;
 	}
 
-	public void addSons(GraphNode... nodes) {
-		for (GraphNode graphNode : nodes) {
-			sons.add(graphNode);
-		}
+	public void addSon(GraphNode node, int distance) {
+		sons.put(node, distance);
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public List<GraphNode> getSons() {
+	public Map<GraphNode, Integer> getSons() {
 		return sons;
+	}
+	
+	public int getAccumulatedDistance() {
+		return accumulatedDistance;
+	}
+	
+	public void incrementAccumulatedDistance(int distance) {
+		this.accumulatedDistance += distance;	
 	}
 }

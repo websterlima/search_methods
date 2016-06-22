@@ -1,6 +1,8 @@
 package metodos_busca;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 public class BuscaProfundidade {
@@ -17,10 +19,12 @@ public class BuscaProfundidade {
 				break;
 			}
 
-			List<GraphNode> sons = node.getSons();
-			for (int i = sons.size() - 1; i > 0; i--) {
-				if (!sons.get(i).isVisited())
-					nodeStack.push(sons.get(i));
+			Set<GraphNode> sons = node.getSons().keySet();
+			List<GraphNode> sonsList = new ArrayList<>(sons);
+			
+			for (int i = sonsList.size() - 1; i > 0; i--) {
+				if (!sonsList.get(i).isVisited())
+					nodeStack.push(sonsList.get(i));
 			}
 		}
 	}

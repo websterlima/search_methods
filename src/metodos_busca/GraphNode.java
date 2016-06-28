@@ -1,6 +1,6 @@
 package metodos_busca;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class GraphNode {
@@ -9,11 +9,15 @@ public class GraphNode {
 	private String name;
 	private Map<GraphNode, Integer> sons;
 	private int accumulatedDistance;
+	
+	private GraphNode() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public GraphNode(String name) {
 		this.visited = false;
 		this.name = name;
-		this.sons = new HashMap<GraphNode, Integer>();
+		this.sons = new LinkedHashMap<GraphNode, Integer>();
 		this.accumulatedDistance = 0;
 	}
 
@@ -45,5 +49,22 @@ public class GraphNode {
 	
 	public void incrementAccumulatedDistance(int distance) {
 		this.accumulatedDistance += distance;	
+	}
+
+	public GraphNode deepCopy() {
+		GraphNode graphNode = new GraphNode();
+		
+		graphNode.accumulatedDistance = this.accumulatedDistance;
+		graphNode.name = this.name;
+		graphNode.sons = this.sons;
+		graphNode.visited = this.visited;
+		
+		return graphNode;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		GraphNode node = (GraphNode) obj;
+		return this.getName().equals(node.getName());
 	}
 }

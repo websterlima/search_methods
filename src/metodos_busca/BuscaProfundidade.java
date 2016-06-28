@@ -21,10 +21,12 @@ public class BuscaProfundidade {
 
 			Set<GraphNode> sons = node.getSons().keySet();
 			List<GraphNode> sonsList = new ArrayList<>(sons);
-			
-			for (int i = sonsList.size() - 1; i > 0; i--) {
-				if (!sonsList.get(i).isVisited())
-					nodeStack.push(sonsList.get(i));
+
+			for (int i = sonsList.size() - 1; i >= 0; i--) {
+				GraphNode graphNode = sonsList.get(i);
+
+				if (!graphNode.isVisited())
+					nodeStack.push(graphNode);
 			}
 		}
 	}
